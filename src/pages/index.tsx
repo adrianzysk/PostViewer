@@ -33,12 +33,12 @@ const HomePage: React.FC<HomePageProps> = ({ total, allPosts }) => {
     );
 };
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
     try {
         const postsData = await getPosts(1, 500);
         const total = postsData.posts?.meta?.totalCount;
         const allPosts = postsData.posts?.data;
-        return { props: { total, allPosts } };
+        return { props: { total, allPosts }, revalidate: 60 };
     } catch (error) {
         console.log(error);
     }
