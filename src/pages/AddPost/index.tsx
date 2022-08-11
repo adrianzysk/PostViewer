@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useRef } from 'react';
 import { Layout } from '../../layouts';
 import Link from 'next/link';
 import { postPost } from '../api/api';
@@ -83,12 +83,17 @@ const Form = styled.form`
 `;
 
 const AddPost: React.FC = () => {
-    const [title, setTitle] = useState('');
-    const [body, setBody] = useState('');
+    const titleInputRef = useRef<HTMLInputElement>(null);
+    const bodyInputRef = useRef<HTMLTextAreaElement>(null);
     const sendPost = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const title = titleInputRef.current?.value;
+        const body = bodyInputRef.current?.value;
         try {
-            const post = await postPost(title, body);
+            let post;
+            if (title && body) {
+                post = await postPost(title, body);
+            }
             if (post?.createPost?.id) {
                 alert('Post created');
             } else {
@@ -97,32 +102,18 @@ const AddPost: React.FC = () => {
         } catch (error) {
             console.log(error);
         }
-        setTitle('');
-        setBody('');
     };
     return (
         <Layout>
             <Wrapper>
                 <Link href="/">
-                    <Button>Wróć</Button>
+                    <Button>Back</Button>
                 </Link>
                 <Form id="someForm" onSubmit={sendPost}>
-                    <label>Tytuł</label>
-                    <input
-                        type="text"
-                        required
-                        value={title}
-                        onChange={(event) => setTitle(event.target.value)}
-                        name="title"
-                    />
-                    <label>Tekst</label>
-                    <textarea
-                        value={body}
-                        required
-                        rows={10}
-                        onChange={(event) => setBody(event.target.value)}
-                        name="body"
-                    />
+                    <label>Title</label>
+                    <input type="text" required ref={titleInputRef} name="title" />
+                    <label>Text</label>
+                    <textarea required rows={10} ref={bodyInputRef} name="body" />
                     <input type="submit" value="Create a Post" />
                 </Form>
             </Wrapper>
