@@ -1,5 +1,5 @@
-import React from 'react';
 import styled from '@emotion/styled';
+import { useRouter } from 'next/router';
 
 const Wrapper = styled.nav`
     display: flex;
@@ -41,10 +41,15 @@ const Pagin = styled.button<{ active?: boolean }>`
 export const Pagination: React.FC<{
     total: number;
     selected: number;
-    selectionFunction: React.Dispatch<React.SetStateAction<number>>;
-}> = ({ total, selected, selectionFunction }) => {
+}> = ({ total, selected }) => {
+    const router = useRouter();
     // create array from total count of posts and select page from created array
     const arr = Array.from({ length: Math.floor(Math.min(total / 20, 50)) }, (_, index) => index + 1);
+    const selectionFunction = (page: number) => {
+        console.log(page);
+        console.log(selected);
+        router.push(`/${page}/${total}`);
+    };
     return (
         <Wrapper>
             {arr.map((page) => {

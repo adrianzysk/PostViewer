@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CustomHelmet } from '@/src/components';
+import { Layout } from '../../layouts';
 import Link from 'next/link';
 import { postPost } from '../api/api';
 import styled from '@emotion/styled';
@@ -101,8 +101,7 @@ const AddPost: React.FC = () => {
         setBody('');
     };
     return (
-        <div>
-            <CustomHelmet pageTitle={'Post Viewer'} />
+        <Layout>
             <Wrapper>
                 <Link href="/">
                     <Button>Wróć</Button>
@@ -127,7 +126,7 @@ const AddPost: React.FC = () => {
                     <input type="submit" value="Create a Post" />
                 </Form>
             </Wrapper>
-        </div>
+        </Layout>
     );
 };
 

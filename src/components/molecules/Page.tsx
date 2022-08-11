@@ -97,7 +97,7 @@ export const Page: React.FC<{ selectedPosts: Array<PostProps> }> = ({ selectedPo
                         <h3>{item.title}</h3>
                         <p>{item.body}</p>
                         <h4>{item.user.username}</h4>
-                        <button>Komentarze</button>
+                        <button>Comments</button>
                     </TextPost>
                 </Post>
             ))}

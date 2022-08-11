@@ -71,8 +71,8 @@ export const Layout: React.FC<LayoutProps> = ({ children, home, pageTitle }) => 
                             <ImgWrapper src={logo.src} alt="logo" />
                         </a>
                     </Link>
-                    <Link href="/AddPost/AddPost">
-                        <AddButton>Dodaj</AddButton>
+                    <Link href="/AddPost">
+                        <AddButton>Add</AddButton>
                     </Link>
                 </HeaderWrapper>
             </Header>

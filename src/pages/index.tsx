@@ -1,7 +1,7 @@
 import { Layout } from '@/src/layouts';
-import { Page, Pagination } from '../components/atoms';
+import { Page, Pagination } from '../components';
 import { getPosts } from './api/api';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 interface PostProps {
     id: string;
@@ -13,11 +13,11 @@ interface PostProps {
 }
 
 interface HomePageProps {
-    total: number;
+    totalCount: number;
     allPosts: Array<PostProps>;
 }
 
-const HomePage: React.FC<HomePageProps> = ({ total, allPosts }) => {
+const HomePage: React.FC<HomePageProps> = ({ totalCount, allPosts }) => {
     const [selectedPage, setSelectedPage] = useState(1);
     const [selectedPosts, setSelectedPosts] = useState<PostProps[]>([]);
     useEffect(() => {
@@ -26,9 +26,9 @@ const HomePage: React.FC<HomePageProps> = ({ total, allPosts }) => {
 
     return (
         <Layout pageTitle="Post Viewer">
-            <Pagination total={total} selected={selectedPage} selectionFunction={setSelectedPage} />
+            <Pagination total={totalCount} selected={selectedPage} />
             <Page selectedPosts={selectedPosts} />
-            <Pagination total={total} selected={selectedPage} selectionFunction={setSelectedPage} />
+            <Pagination total={totalCount} selected={selectedPage} />
         </Layout>
     );
 };
@@ -36,9 +36,9 @@ const HomePage: React.FC<HomePageProps> = ({ total, allPosts }) => {
 export async function getStaticProps() {
     try {
         const postsData = await getPosts(1, 500);
-        const total = postsData.posts?.meta?.totalCount;
+        const totalCount = postsData.posts?.meta?.totalCount;
         const allPosts = postsData.posts?.data;
-        return { props: { total, allPosts }, revalidate: 60 };
+        return { props: { totalCount, allPosts }, revalidate: 10 };
     } catch (error) {
         console.log(error);
     }
