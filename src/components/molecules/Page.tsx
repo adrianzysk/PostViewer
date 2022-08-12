@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
-import placeholder from '@/public/images/placeholder.png';
+import placeholder from '@/public/placeholder.png';
+import { device } from '@/src/styles/breakpoints';
 
 interface PostProps {
     id: string;
@@ -19,27 +20,29 @@ const Wrapper = styled.section`
 
 const Post = styled.div`
     display: flex;
+    flex-direction: column;
     margin: 5px 5px;
     background-color: white;
+    @media ${device.tablet} {
+        flex-direction: row;
+    }
 `;
 
 const ImgWrapper = styled.div`
     padding: 20px;
+    margin: auto;
     img {
-        width: 200px;
-        height: 150px;
-        @media (max-width: 768px) {
-            width: 100px;
-            height: 50px;
-        }
+        width: 300px;
+        height: 200px;
     }
-    @media (max-width: 768px) {
+    @media ${device.tablet} {
         padding: 5px;
     }
 `;
 
 const TextPost = styled.div`
-    padding-top: 20px;
+    padding: 20px;
+    margin: 5px 0;
     h3 {
         color: #328efe;
         &:hover {
@@ -50,8 +53,8 @@ const TextPost = styled.div`
     p {
         margin: 20px 0;
     }
-    h4 {
-        margin: 20px 0;
+    .user {
+        font-size: 20px;
         color: gray;
     }
     button {
@@ -69,18 +72,9 @@ const TextPost = styled.div`
             opacity: 0.8;
             color: #328efe;
         }
-        @media (max-width: 768px) {
-            width: 100px;
-            height: 35px;
-        }
-    }
-    @media (max-width: 768px) {
-        padding-top: 5px;
-        p {
-            margin: 5px 0;
-        }
-        h4 {
-            margin: 5px 0;
+        @media ${device.tablet} {
+            width: 150px;
+            height: 50px;
         }
     }
 `;
@@ -96,7 +90,7 @@ export const Page: React.FC<{ selectedPosts: Array<PostProps> }> = ({ selectedPo
                     <TextPost>
                         <h3>{item.title}</h3>
                         <p>{item.body}</p>
-                        <h4>{item.user.username}</h4>
+                        <p className="user">{item.user.username}</p>
                         <button>Comments</button>
                     </TextPost>
                 </Post>

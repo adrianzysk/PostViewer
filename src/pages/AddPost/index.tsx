@@ -1,12 +1,13 @@
 import { useRef } from 'react';
 import { Layout } from '../../layouts';
 import Link from 'next/link';
-import { postPost } from '../api/api';
+import { postPost } from '../../api/api';
 import styled from '@emotion/styled';
+import { device } from '@/src/styles/breakpoints';
 
 const Wrapper = styled.div`
-    max-width: 1000px;
-    padding: 5px;
+    width: 100%;
+    padding: 10px;
     margin: auto;
 `;
 
@@ -16,8 +17,8 @@ const Button = styled.a`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 150px;
-    height: 50px;
+    width: 100px;
+    height: 35px;
     margin: 10px 0;
     background-color: white;
     border: 2px solid black;
@@ -27,9 +28,9 @@ const Button = styled.a`
         opacity: 0.8;
         color: #328efe;
     }
-    @media (max-width: 768px) {
-        width: 100px;
-        height: 35px;
+    @media ${device.laptop} {
+        width: 150px;
+        height: 50px;
     }
 `;
 

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { CustomHelmet } from '@/src/components';
 import Link from 'next/link';
-import logo from '@/public/images/logo.png';
+import logo from '@/public/logo.png';
 
 export const siteTitle = 'Next.js Sample Website';
 
@@ -60,7 +60,7 @@ const Container = styled.div`
     max-width: 1000px;
 `;
 
-export const Layout: React.FC<LayoutProps> = ({ children, home, pageTitle }) => {
+export const Layout: React.FC<LayoutProps> = ({ children, pageTitle }) => {
     return (
         <div>
             <CustomHelmet pageTitle={pageTitle ? pageTitle : undefined} />
