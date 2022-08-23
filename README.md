@@ -43,7 +43,7 @@ NEXT_PUBLIC_HOST=https://somegraphqlbackend.com/graphql
 
 # Concepts
 
-This repo boilerplate uses: 
+This repo uses: 
 - NextJs ^12
 - TypeScript
 - Emotion
